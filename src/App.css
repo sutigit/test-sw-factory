@@ -5,17 +5,48 @@
   gap: 24px;
 }
 
+.version-tag {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  margin: 0;
+  padding: 4px 10px;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: 999px;
+  background: rgba(248, 250, 252, 0.88);
+  color: #334155;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+}
+
+@media (prefers-color-scheme: dark) {
+  .version-tag {
+    border-color: rgba(248, 250, 252, 0.14);
+    background: rgba(15, 23, 42, 0.82);
+    color: #cbd5e1;
+  }
+}
+
 .square {
   width: 120px;
   height: 120px;
   border-radius: 16px;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow:
+    0 10px 25px -5px rgba(0, 0, 0, 0.15),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .square:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.2),
+    0 10px 10px -5px rgba(0, 0, 0, 0.1);
 }
 
 .square-indigo {
