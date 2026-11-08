@@ -41,6 +41,7 @@ jobs:
       - run: npm run build
         env:
           APP_RELEASE_TAG: ${{ steps.release.outputs.tag }}
+          VITE_SENTRY_DSN: ${{ secrets.VITE_SENTRY_DSN }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
