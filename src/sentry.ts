@@ -1,5 +1,10 @@
 export interface SentryCrashUtilities {
-  crashUncaught: () => never;
+  crashUncaught: () => void;
+  crashCaught: () => void;
+}
+
+export interface CrashDetonatorApi {
+  crashUncaught: () => void;
   crashCaught: () => void;
 }
 
@@ -9,17 +14,29 @@ declare global {
   }
 }
 
+let crashDetonator: CrashDetonatorApi | null = null;
+
+export function registerCrashDetonator(
+  detonator: CrashDetonatorApi | null,
+): void {
+  crashDetonator = detonator;
+}
+
+function requireCrashDetonator(): CrashDetonatorApi {
+  if (crashDetonator === null) {
+    throw new Error("Crash detonator is not mounted");
+  }
+
+  return crashDetonator;
+}
+
 export function initSentryCrashUtilities(): void {
   window.sentry = {
     crashUncaught: () => {
-      throw new Error("Production test: uncaught error");
+      requireCrashDetonator().crashUncaught();
     },
     crashCaught: () => {
-      try {
-        throw new Error("Production test: caught error");
-      } catch (error) {
-        console.error("Production test: caught error successfully", error);
-      }
+      requireCrashDetonator().crashCaught();
     },
   };
 }
