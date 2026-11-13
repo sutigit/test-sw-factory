@@ -2,15 +2,17 @@
 
 A sandbox for trying out software factory concepts.
 
+Visitors must sign in with Auth0 before they can use the app. See [Authentication](#authentication).
+
 ## Docker
 
-Build and run the app:
+Build and run the app. Pass Auth0 values from `.env.local` at build time (Vite inlines `VITE_*` into the bundle; `.env.local` is not copied into the image):
 
 ```bash
-docker compose up --build
+docker compose --env-file .env.local up --build
 ```
 
-Open [http://localhost:8080](http://localhost:8080).
+Open [http://localhost:8080](http://localhost:8080) (redirects to `/test-sw-factory/`) or [http://localhost:8080/test-sw-factory/](http://localhost:8080/test-sw-factory/).
 
 ## Authentication
 
@@ -50,7 +52,7 @@ Copy [`.env.example`](.env.example) to `.env.local` and set:
 | `VITE_AUTH0_DOMAIN`    | Auth0 tenant domain (for example `your-tenant.auth0.com`) |
 | `VITE_AUTH0_CLIENT_ID` | Auth0 SPA Client ID                                       |
 
-Domain and Client ID are public SPA config. Vite still inlines `VITE_*` values at build time, so CI must receive them too.
+Domain and Client ID are public SPA config. Vite still inlines `VITE_*` values at build time, so Docker and CI must receive them at build time too.
 
 ### CI
 
